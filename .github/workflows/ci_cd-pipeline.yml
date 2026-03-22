@@ -1,9 +1,9 @@
-name: CI Pipeline
+name: CI-CD Pipeline
 
 on: [push]
 
 jobs:
-  test:
+  pipeline:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,3 +29,9 @@ jobs:
 
       - name: Terraform Validate
         run: terraform -chdir=terraform validate
+
+      - name: Build da imagem Docker
+        run: docker build -t devops-project .
+
+      - name: Executar deploy com script
+        run: bash deploy.sh
